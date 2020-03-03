@@ -1,0 +1,19 @@
+---
+- name: general stuff to install
+  hosts: all
+  remote_user: sudo
+  become: true
+
+  tasks:
+    - name: get update
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+#    - name: adding key to authroized keys
+#      copy:
+#        src: home/vagrant/environment/awsk
+#        dest: /home/vagrant/.ssh
+
+    - name: install pip
+      shell: sudo apt-get install python3-pip -y
