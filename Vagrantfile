@@ -9,6 +9,10 @@ Vagrant.configure("2") do |config|
     python.vm.box = "ubuntu/bionic64"
     python.vm.network "private_network", ip: "192.168.10.100"
     python.hostsupdater.aliases = ["development.local"]
+    python.vm.synced_folder "tests" , "/home/vagrant/tests"
+    python.vm.synced_folder "src" , "/home/vagrant/src"
+    python.vm.synced_folder "Downloads" , "/home/vagrant/Downloads"
+    python.vm.synced_folder "app" , "/home/vagrant/apps"
     python.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "/vagrant/app/playbook.yml"
     end

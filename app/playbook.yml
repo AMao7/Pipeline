@@ -3,17 +3,19 @@
   hosts: all
   remote_user: sudo
   become: true
-
   tasks:
-    - name: get update
-      apt:
-        upgrade: yes
-        update_cache: yes
+  - name: get update
+    apt:
+      upgrade: yes
+      update_cache: yes
+  - name: install pip
+    shell: sudo apt-get install python3-pip -y
 
-#    - name: adding key to authroized keys
-#      copy:
-#        src: home/vagrant/environment/awsk
-#        dest: /home/vagrant/.ssh
+  - name: install oracle
+    shell: sudo apt-get install openjdk-8-jre-headless -y
 
-    - name: install pip
-      shell: sudo apt-get install python3-pip -y
+  - name: public key
+    shell: sudo cat /vagrant/environment/jenkin_key.pub >> /home/vagrant/.ssh/authorized_keys
+
+  - name: install git
+    shell: sudo apt-get install git -y
